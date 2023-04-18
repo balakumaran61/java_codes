@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+interface  AdvancedArithmetic
+{
+    abstract int division_sum(int n);
+}
+class MyCalculator implements  AdvancedArithmetic
+
+  {
+     public int division_sum(int n)
+      {
+             int x=0;
+             int i;
+             for(i=1;i<=n;i++)
+             {
+                 if(n%i==0)
+                 {
+                     x+=i;
+                 }
+             }
+             return x;
+      }
+ }
+
+
+
+public class Main {
+    public static void main(String[] args)
+    {
+       MyCalculator ob= new MyCalculator();
+       Scanner s=new Scanner(System.in);
+        System.out.println("enter the number");
+        int num;
+        num=s.nextInt();
+       int result=ob.division_sum(num);
+        System.out.println("the answer is "+result);
+    }
+}
