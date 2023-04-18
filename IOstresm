@@ -1,1 +1,70 @@
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+
+/*   
+
+. You will write a program to compute a car’s gas mileage and the amount you spend per mile traveled.
+ In particular, ask the user for the following. 
+ 
+Write this information into a file. And read the content, compute the total miles drive,
+ the number of gallons of gas used (total amount for fill-up / price per gallon),
+  and the miles per gallon that the car achieved (total miles / number of gallons). 
+  Note that number of gallons and miles per gallon will both be doubles. Display the results properly. 
+
+
+
+ */
+public class Main {
+    public static void main(String[] args)
+    {
+        Scanner s=new Scanner(System.in);
+        System.out.println("enter the name");
+        String uname=s.nextLine();
+        System.out.println("enter the initial odometer reading");
+        double iread=s.nextDouble();
+        System.out.println("enter the final odometer reading");
+        double fread=s.nextDouble();
+        double distance=fread-iread;
+        System.out.println("enter the price per gallon");
+        double pricePerGallon=s.nextDouble();
+        System.out.println("enter the amount paid for gallon");
+        double amountPaid=s.nextDouble();
+
+        try
+        {
+            FileWriter fwrite =new FileWriter("car_info.txt");
+            fwrite.write(String.format("%s%n%.2f%n%.2f%n%.2f%n",uname,distance,pricePerGallon,amountPaid));
+
+            fwrite.close();
+
+        }
+        catch(IOException e)
+        {
+            System.out.println("error occured");
+            e.printStackTrace();
+        }
+
+        try
+        {
+            File freads=new File("car_info.txt");
+            Scanner sc =new Scanner(freads);
+            String fname=sc.next();
+            double distanceTxt =sc.nextDouble();
+            double pricePerGallonTxt=sc.nextDouble();
+            double amountPaidTxt=sc.nextDouble();
+
+            double gallon_used =amountPaidTxt/pricePerGallonTxt;
+            double mileage=distanceTxt/gallon_used;
+            System.out.printf(" hey %s, you have driven %.2f distance and the mileage is %.2f",fname,distanceTxt,mileage);
+        }
+        catch(IOException e)
+        {
+            System.out.println("error occured");
+            e.printStackTrace();
+        }
+    }
+}
